@@ -18,7 +18,7 @@ class SwipeableCardView(
     attrs,
 ) {
 
-   private var callback: () -> Unit = {}
+   private var swipeCallback: () -> Unit = {}
 
     init {
         context.theme.obtainStyledAttributes(attrs, R.styleable.SwipeableCardView, 0, 0).apply {
@@ -78,7 +78,7 @@ class SwipeableCardView(
             .setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
                     visibility = GONE
-                    callback.invoke()
+                    swipeCallback.invoke()
                 }
             }).start()
     }
@@ -108,7 +108,7 @@ class SwipeableCardView(
      * sends a callback when the card is swiped over the activation threshold, and removed from the screen
      * */
     fun addOnSwipedListener(callback: () -> Unit){
-        this.callback = callback
+        this.swipeCallback = callback
     }
 
     companion object {
